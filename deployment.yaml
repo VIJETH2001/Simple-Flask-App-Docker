@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+  labels:
+    app: flask-app
+spec:
+  replicas: 3  # Number of replicas for your application pods
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask-app
+          image: tarundocker177/pythonapp:v1  # Replace with your image name
+          ports:
+            - containerPort: 5000  # Flask app usually runs on port 5000
+          env:
+            - name: FLASK_ENV
+              value: "production"  # Set the Flask environment variable to production
+            - name: FLASK_APP
+              value: "product_list_app.py"  # Your Flask app's entry script
+          imagePullPolicy: Always
+      restartPolicy: Always
