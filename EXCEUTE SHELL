@@ -1,0 +1,15 @@
+# Navigate to your project directory (adjust the path as necessary)
+cd $WORKSPACE  # Jenkins automatically sets this to the workspace directory
+
+# Set up a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+. venv/bin/activate  # Use the dot command instead of source
+
+# Install the required dependencies from requirements.txt
+pip install -r requirements.txt
+
+# Run the Flask application
+# You can modify the host and port if necessary (default is host='127.0.0.1', port=5000)
+python product_list_app.py &
