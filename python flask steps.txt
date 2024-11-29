@@ -1,0 +1,46 @@
+python flask app
+plugins-cloudBees Docker Build and Publish plugin
+
+new item-> python_step1
+source code management-> git
+https://github.com/VIJETH2001/Simple-Flask-App-Docker.git
+
+main
+
+Build step
+-> execute shell
+
+# Navigate to your project directory (adjust the path as necessary)
+cd $WORKSPACE  # Jenkins automatically sets this to the workspace directory
+
+# Set up a virtual environment
+python3 -m venv venv
+
+# Activate the virtual environment
+. venv/bin/activate  # Use the dot command instead of source
+
+# Install the required dependencies from requirements.txt
+pip install -r requirements.txt
+
+# Run the Flask application
+# You can modify the host and port if necessary (default is host='127.0.0.1', port=5000)
+python product_list_app.py 
+# (& to stop the sservice
+
+save and build
+localhost:5070/products
+
+new item -> python_step2
+copy from python_step1
+
+Build step-> Docker Build and Publish
+repository name- vijeth2001/pythonapp
+tag-v1
+registry credentials- add credentials
+
+Add Build Step
+->Execute shell
+docker run -it -d -p 5001:5070 vijeth2001/pythonapp
+
+save and build 
+localhost:5001/products
